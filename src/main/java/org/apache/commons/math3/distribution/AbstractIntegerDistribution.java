@@ -138,7 +138,7 @@ public abstract class AbstractIntegerDistribution implements IntegerDistribution
                 upper = ((int) Math.ceil(tmp)) - 1;
             }
         }
-
+       
         return solveInverseCumulativeProbability(p, lower, upper);
     }
 
@@ -190,7 +190,11 @@ public abstract class AbstractIntegerDistribution implements IntegerDistribution
      * inversion method</a>.
      */
     public int sample() {
-        return inverseCumulativeProbability(random.nextDouble());
+    	int res = inverseCumulativeProbability(random.nextDouble());
+    	if(res <= 0) {
+    		res = random.nextInt(50);
+    	}
+        return res;
     }
 
     /**
